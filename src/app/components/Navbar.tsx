@@ -15,8 +15,8 @@ export const Navbar = () => {
           className="h-8 mr-2"
         />
         <div className="flex items-center bg-white rounded-md p-2 ml-2 w-80">
-          <BiSearch className="text-yellow-200 text-lg" />
           <input type="text" placeholder="Search For a Movie" className="outline-none ml-2" />
+          <BiSearch className="text-yellow-200 text-lg mx-auto" />
         </div>
       </div>
       <div className="flex items-center right">
