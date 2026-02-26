@@ -38,7 +38,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search for movies, theatres..."
-                className="w-full bg-white/10 border border-white/20 rounded-full py-2 pl-4 pr-10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
+                className="flex items-center cursor-text w-[calc(100%-16px)] max-w-137.25 bg-white border rounded border-solid border-[rgb(238,238,238)] transition-all"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search for movies..."
-            className="w-full bg-white/10 border border-white/20 rounded-full py-2 pl-10 pr-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
+            className="w-full bg-white border border-white/20 rounded py-2 pl-10 pr-4 text-black placeholder-gray-400 focus:outline-none focus:ring-2  focus:ring-red-500/50 focus:border-transparent transition-all"
           />
         </div>
       </div>
