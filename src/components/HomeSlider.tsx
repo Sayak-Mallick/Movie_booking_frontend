@@ -58,12 +58,6 @@ const slides = [
 const HomeSlider = () => {
   return (
     <Swiper
-      cssMode={true}
-      navigation={true}
-      pagination={true}
-      mousewheel={true}
-      keyboard={true}
-      autoplay={true}
       modules={[
         Navigation,
         Pagination,
@@ -72,23 +66,30 @@ const HomeSlider = () => {
         Autoplay,
         EffectFade,
       ]}
-      className="mySwiper"
+      effect="fade"
+      loop
+      autoplay={{ delay: 4000, disableOnInteraction: false }}
+      navigation
+      pagination={{ clickable: true }}
+      keyboard
+      mousewheel
+      className="w-full"
     >
-      {slides.map((banner, index) => {
-        return (
-          <SwiperSlide key={index}>
-            <div className="relative w-full h-[90vh]">
-              <Image
-                src={banner.image}
-                alt=""
-                fill
-                priority
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          </SwiperSlide>
-        );
-      })}
+      {slides.map((banner, index) => (
+        <SwiperSlide key={index}>
+          {/* Responsive height container */}
+          <div className="relative w-full h-[55vh] sm:h-[65vh] md:h-[75vh] lg:h-[90vh]">
+            <Image
+              src={banner.image}
+              alt="Banner"
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };
