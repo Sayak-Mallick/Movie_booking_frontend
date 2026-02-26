@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap');
+
+.home-slider-root {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #0a0a0a;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Noise texture overlay */
+.home-slider-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.6;
+}
+
+/* ─── Swiper ─────────────────────────────────────────── */
+.hs-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.hs-swiper .swiper-pagination {
+  display: none;
+}
+
+.hs-swiper .swiper-button-next,
+.hs-swiper .swiper-button-prev {
+  display: none;
+}
+
+/* ─── Slide ──────────────────────────────────────────── */
+.hs-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hs-slide-image {
+  position: absolute;
+  inset: 0;
+  transition: transform 8s ease;
+  transform: scale(1.08);
+}
+
+.swiper-slide-active .hs-slide-image {
+  transform: scale(1);
+}
+
+.hs-slide-image img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ─── Overlays ───────────────────────────────────────── */
+.hs-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%),
+    linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 45%);
+  z-index: 2;
+}
+
+.hs-accent-stripe {
+  position: absolute;
+  top: 0;
+  right: 18%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, var(--accent) 30%, var(--accent) 70%, transparent 100%);
+  opacity: 0.35;
+  z-index: 3;
+  transform: skewX(-8deg);
+  transition: background 0.6s ease;
+}
+
+/* ─── Progress Bar ───────────────────────────────────── */
+.hs-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 9;
+  background: rgba(255,255,255,0.1);
+}
+
+.hs-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: background 0.4s ease;
+  animation: progressAnim 5s linear infinite;
+}
+
+/* ─── Brand ──────────────────────────────────────────── */
+.hs-brand {
+  position: absolute;
+  top: 2rem;
+  left: 6%;
+  z-index: 9;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: white;
+  text-transform: uppercase;
+}
+
+.hs-brand span {
+  color: var(--accent);
+  transition: color 0.4s ease;
+}
+
+/* ─── Content ────────────────────────────────────────── */
+.hs-content {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 6% 6%;
+  max-width: 720px;
+}
+
+.hs-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: none;
+}
+
+.hs-tag::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.swiper-slide-active .hs-tag {
+  animation: slideUp 0.7s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hs-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  color: #ffffff;
+  white-space: pre-line;
+  margin-bottom: 1.4rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: none;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.4);
+}
+
+.hs-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.swiper-slide-active .hs-title {
+  animation: slideUp 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hs-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.03em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: none;
+}
+
+.swiper-slide-active .hs-subtitle {
+  animation: slideUp 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── CTA Button ─────────────────────────────────────── */
+.hs-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 32px;
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  width: fit-content;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.swiper-slide-active .hs-cta {
+  animation: slideUp 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hs-cta:hover {
+  background: var(--accent);
+  color: #0a0a0a;
+  transform: translateY(-2px) !important;
+}
+
+.hs-cta-arrow {
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  position: relative;
+  transition: width 0.3s ease;
+}
+
+.hs-cta-arrow::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-top: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.hs-cta:hover .hs-cta-arrow {
+  width: 26px;
+}
+
+/* ─── Bottom Bar ─────────────────────────────────────── */
+.hs-bottom-bar {
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  z-index: 8;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 6% 2.5rem;
+}
+
+.hs-counter {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hs-counter-current {
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  transition: color 0.4s ease;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.hs-counter-sep {
+  width: 24px;
+  height: 1px;
+  background: rgba(255,255,255,0.3);
+}
+
+/* ─── Navigation Buttons ─────────────────────────────── */
+.hs-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.hs-nav-btn {
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.2s ease;
+  color: white;
+}
+
+.hs-nav-btn:hover {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.12);
+  transform: scale(1.05);
+}
+
+.hs-nav-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* ─── Dot Indicators ─────────────────────────────────── */
+.hs-dots {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hs-dot {
+  width: 3px;
+  height: 20px;
+  background: rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: height 0.4s ease, background 0.4s ease;
+}
+
+.hs-dot.active {
+  height: 40px;
+  background: var(--accent);
+}
+
+/* ─── Animations ─────────────────────────────────────── */
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progressAnim {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* ─── Responsive ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hs-content {
+    padding: 0 5% 8rem;
+  }
+
+  .hs-dots {
+    display: none;
+  }
+
+  .hs-accent-stripe {
+    display: none;
+  }
+}

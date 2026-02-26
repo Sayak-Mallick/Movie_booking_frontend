@@ -7,11 +7,11 @@ interface Props {
 
 export default function AppShell({ children }: Props) {
   return (
-    <div className="min-h-screen flex flex-col bg-(--bg-main) text-(--text-primary)">
+    <div className="flex flex-col min-h-screen bg-(--bg-main) text-(--text-primary)">
       <Navbar />
-      <main className="flex-1 w-full px-6 sm:px-10 lg:px-16 xl:px-24 py-8">
+      {/*<main className="flex-1 w-full px-6 sm:px-10 lg:px-16 xl:px-24 py-8">*/}
         {children}
-      </main>
+      {/*</main>*/}
       <Footer />
     </div>
   );
