@@ -62,7 +62,7 @@ export default function Footer() {
     },
   ];
 
-  const hoverLink = (e, enter:boolean) => {
+  const hoverLink = (e: any, enter:boolean) => {
     e.target.style.color = enter ? "#1A1A1A" : "#525252";
   };
 

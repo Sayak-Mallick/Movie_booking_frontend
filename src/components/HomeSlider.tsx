@@ -1,10 +1,8 @@
 "use client";
 import {
-  Navigation,
   Pagination,
   Autoplay,
   EffectFade,
-  Mousewheel,
   Keyboard,
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -59,9 +57,7 @@ const HomeSlider = () => {
   return (
     <Swiper
       modules={[
-        Navigation,
         Pagination,
-        Mousewheel,
         Keyboard,
         Autoplay,
         EffectFade,
@@ -69,10 +65,8 @@ const HomeSlider = () => {
       effect="fade"
       loop
       autoplay={{ delay: 4000, disableOnInteraction: false }}
-      navigation
       pagination={{ clickable: true }}
       keyboard
-      mousewheel
       className="w-full"
     >
       {slides.map((banner, index) => (
